@@ -1,0 +1,3 @@
+[submodule "skeleton-free-pose-transfer"]
+	path = skeleton-free-pose-transfer
+	url = https://github.com/zycliao/skeleton-free-pose-transfer.git
