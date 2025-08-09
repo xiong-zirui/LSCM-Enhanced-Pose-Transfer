@@ -2,8 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# 3D Pose Transfer with Conformal Geometry Priors
-
 This project is an enhanced version of the original [Skeleton-free Pose Transfer](https://github.com/zycliao/skeleton-free-pose-transfer) model. The core enhancement is the integration of **Conformal Geometry Priors** using **Least Squares Conformal Maps (LSCM)**, calculated via the powerful [libigl](https://github.com/libigl/libigl) library.
 
 The primary goal is to improve the accuracy and robustness of 3D pose transfer by providing the underlying neural network with strong, pose-invariant geometric information from the beginning.
@@ -15,6 +13,19 @@ Traditional data-driven approaches learn geometric features from scratch, which 
 This project addresses this by computing a **2D UV parameterization** for each 3D model using LSCM. This UV map preserves local angles and represents a "geometric fingerprint" of the mesh's surface, independent of its current pose.
 
 We then concatenate this 2D UV coordinate with the original 3D vertex coordinates (x, y, z) to create a richer **5-dimensional feature vector (x, y, z, u, v)**. This vector is then fed into the network's encoder, giving the model a direct understanding of the mesh's intrinsic geometry.
+
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Cloning the Repository
+
+Because this project uses Git submodules, you need to use the `--recurse-submodules` flag when cloning:
+
+```bash
+git clone --recurse-submodules https://github.com/xiong-zirui/LSCM-Enhanced-Pose-Transfer.git
+cd LSCM-Enhanced-Pose-Transfer
+```
 
 ## How to Run
 
@@ -48,33 +59,3 @@ After preprocessing, you can run the training or demo scripts as described in th
 ## Acknowledgements
 
 This work is built upon the foundational research and implementation of [Skeleton-free Pose Transfer](https://github.com/zycliao/skeleton-free-pose-transfer). We extend our gratitude to the original authors for their contribution to the community.
- methods.
-
----
-
-## Core Idea
-This model integrates the strengths of deep learning and computational geometry. It enhances the **[Skeleton-free Pose Transfer](https://github.com/zycliao/skeleton-free-pose-transfer/)** framework by:
-1.  **Enhancing the Encoder**: Augmenting input features with pre-computed LSCM UV coordinates to provide a pose-invariant "geometric signature" for each vertex.
-2.  **Regularizing the Skinning Weights**: Introducing a consistency loss based on point-to-point correspondence from the conformal map to ensure geometrically plausible skinning weight prediction.
-
-## Tech Stack
-* **Python**
-* **PyTorch**
-* **libigl (via Python bindings)**
-* **NumPy**
-
-## Setup & Usage
-*(To be filled in later)*
-
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/xiong-zirui/3dPoseTransfer.git](https://github.com/xiong-zirui/3dPoseTransfer.git)
-    ```
-2.  ...
-
-## TODO
-- [ ] Set up project environment and dependencies.
-- [ ] Integrate and test `libigl.lscm` functionality.
-- [ ] Implement data preprocessing pipeline for UV coordinate generation.
-- [ ] Modify model architecture to accept 5D input features (x, y, z, u, v).
-- [ ] Train and validate the enhanced model against the baseline.
